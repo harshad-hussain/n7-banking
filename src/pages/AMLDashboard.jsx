@@ -14,27 +14,19 @@ import {
   ResponsiveContainer 
 } from 'recharts';
 import { FaBullseye, FaCalendarAlt, FaEllipsisV } from 'react-icons/fa';
-
 function AMLDashboard() {
   const { summary, pieChart, barChart, reports } = amlData;
-
   const COLORS = pieChart.map(item => item.fill);
-
   return (
     <DashboardLayout logo="N7">
       <div className="space-y-6">
-        
-        {/* Title Header */}
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-white font-display">AML Dashboard</h1>
             <p className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-semibold">System Activity Records</p>
           </div>
         </div>
-
-        {/* Top Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Card 1: STR Count */}
           <div className="glass-panel rounded-2xl p-6 relative overflow-hidden group shadow-lg">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-rose-500"></div>
             <div className="flex justify-between items-start">
@@ -53,8 +45,6 @@ function AMLDashboard() {
               </div>
             </div>
           </div>
-
-          {/* Card 2: Pending Process */}
           <div className="glass-panel rounded-2xl p-6 relative overflow-hidden group shadow-lg">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-amber-500"></div>
             <div className="flex justify-between items-start">
@@ -74,11 +64,7 @@ function AMLDashboard() {
             </div>
           </div>
         </div>
-
-        {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          
-          {/* Donut Chart (2/5 size) */}
           <div className="lg:col-span-2 glass-panel rounded-2xl p-6 shadow-md flex flex-col justify-between">
             <div className="flex justify-between items-center pb-4 border-b border-slate-800">
               <h3 className="text-sm font-bold text-slate-200">Suspicious Transactions (Reason Distribution)</h3>
@@ -86,7 +72,6 @@ function AMLDashboard() {
                 <FaEllipsisV />
               </button>
             </div>
-
             <div className="h-64 flex justify-center items-center my-4">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -108,15 +93,11 @@ function AMLDashboard() {
                   />
                 </PieChart>
               </ResponsiveContainer>
-              
-              {/* Legend inside Donut */}
               <div className="absolute flex flex-col items-center">
                 <span className="text-2xl font-black text-white font-display">450</span>
                 <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase">STR Case</span>
               </div>
             </div>
-
-            {/* Custom Labels List */}
             <div className="grid grid-cols-2 gap-2 text-xs pt-4 border-t border-slate-800/60">
               {pieChart.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2">
@@ -126,8 +107,6 @@ function AMLDashboard() {
               ))}
             </div>
           </div>
-
-          {/* STR Summary Bar Chart (3/5 size) */}
           <div className="lg:col-span-3 glass-panel rounded-2xl p-6 shadow-md flex flex-col justify-between">
             <div className="flex justify-between items-center pb-4 border-b border-slate-800">
               <h3 className="text-sm font-bold text-slate-200">STR Summary Timeline</h3>
@@ -144,7 +123,6 @@ function AMLDashboard() {
                 />
               </div>
             </div>
-
             <div className="h-64 mt-6">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={barChart} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
@@ -174,10 +152,7 @@ function AMLDashboard() {
               </ResponsiveContainer>
             </div>
           </div>
-
         </div>
-
-        {/* AML Case Report Table */}
         <div className="glass-panel rounded-2xl p-6 shadow-md overflow-hidden">
           <div className="flex justify-between items-center pb-4 border-b border-slate-800">
             <h3 className="text-sm font-bold text-slate-200">Suspicious Transactions Audit (AML Report)</h3>
@@ -185,7 +160,6 @@ function AMLDashboard() {
               <FaEllipsisV />
             </button>
           </div>
-
           <div className="overflow-x-auto mt-4">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
@@ -222,8 +196,6 @@ function AMLDashboard() {
               </tbody>
             </table>
           </div>
-
-          {/* Action buttons at bottom of table */}
           <div className="flex gap-3 justify-end items-center mt-6 pt-4 border-t border-slate-800">
             <button className="text-xs px-4 py-2 rounded-lg bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-750 hover:text-white transition-colors">
               Generate Report
@@ -233,10 +205,8 @@ function AMLDashboard() {
             </button>
           </div>
         </div>
-
       </div>
     </DashboardLayout>
   );
 }
-
 export default AMLDashboard;

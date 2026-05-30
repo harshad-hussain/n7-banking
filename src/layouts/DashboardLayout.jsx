@@ -14,19 +14,14 @@ import {
   FaBell,
   FaGlobe
 } from 'react-icons/fa';
-
 function DashboardLayout({ logo = "N7", children }) {
   const location = useLocation();
-
-  // Sidebar links based on which logo/app context is selected
   const isWeekly = location.pathname.includes('weekly');
-
   const links = [
     { to: "/dashboard/aml", label: "AML Dashboard", icon: FaChartBar },
     { to: "/dashboard/ckyc", label: "CKYC Dashboard", icon: FaFileAlt },
     { to: "/dashboard/weekly", label: "Weekly Summary", icon: FaTrophy },
   ];
-
   const dummyLinks = isWeekly 
     ? [
         { label: "Transactions", icon: FaTasks },
@@ -42,22 +37,15 @@ function DashboardLayout({ logo = "N7", children }) {
         { label: "Settings", icon: FaCog },
         { label: "Help Center", icon: FaQuestionCircle }
       ];
-
   return (
     <div className="min-h-screen bg-[#0b0f19] flex text-slate-100 font-sans">
-      
-      {/* Sidebar */}
       <aside className="w-64 bg-[#0e1726] border-r border-slate-800 flex flex-col shrink-0">
-        {/* Sidebar Header */}
         <div className="h-20 px-6 flex items-center border-b border-slate-800">
           <span className="text-3xl font-extrabold text-blue-500 tracking-wider font-display">
             {logo}
           </span>
         </div>
-
-        {/* Navigation */}
         <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
-          {/* Main Dashboards Section */}
           <div>
             <p className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
               Dashboards
@@ -85,8 +73,6 @@ function DashboardLayout({ logo = "N7", children }) {
               })}
             </ul>
           </div>
-
-          {/* Dummy System Links */}
           <div>
             <p className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
               System Modules
@@ -94,7 +80,6 @@ function DashboardLayout({ logo = "N7", children }) {
             <ul className="space-y-1">
               {dummyLinks.map((link, idx) => {
                 const Icon = link.icon;
-                // Highlight the AML/CKYC dummy links since we aren't routing them
                 return (
                   <li key={idx}>
                     <button
@@ -113,8 +98,6 @@ function DashboardLayout({ logo = "N7", children }) {
             </ul>
           </div>
         </nav>
-
-        {/* Sidebar Footer (Cloud CTA inside Weekly Sumup sidebar) */}
         {isWeekly && (
           <div className="p-4 mx-4 mb-4 rounded-xl bg-slate-800/50 border border-slate-700/50 flex flex-col items-center text-center">
             <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center mb-2">
@@ -126,14 +109,8 @@ function DashboardLayout({ logo = "N7", children }) {
           </div>
         )}
       </aside>
-
-      {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        
-        {/* Top Navbar */}
         <header className="h-20 bg-[#0e1726] border-b border-slate-800 px-8 flex justify-between items-center shrink-0">
-          
-          {/* Search bar */}
           <div className="relative w-64">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FaSearch className="text-slate-400 text-sm" />
@@ -144,30 +121,21 @@ function DashboardLayout({ logo = "N7", children }) {
               className="w-full bg-slate-800 border border-slate-750 text-slate-200 placeholder-slate-400 text-sm rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:border-blue-500/80 focus:ring-1 focus:ring-blue-500/80 transition-colors"
             />
           </div>
-
-          {/* User & Settings header list */}
           <div className="flex items-center gap-6">
-            
-            {/* Bank Detail Tag */}
             <div className="hidden lg:flex flex-col text-right text-xs border-r border-slate-800 pr-4">
               <span className="text-slate-400">Maruti Chowk Branch</span>
               <span className="font-semibold text-slate-300">ID: 003 • Bank 2.0</span>
             </div>
-
-            {/* Icons */}
             <div className="flex items-center gap-4 text-slate-400">
               <button className="flex items-center gap-1 hover:text-slate-200 text-xs">
                 <FaGlobe />
                 <span>EN</span>
               </button>
-              
               <button className="relative hover:text-slate-200">
                 <FaBell />
                 <span className="absolute -top-1.5 -right-1.5 w-2 h-2 rounded-full bg-rose-500"></span>
               </button>
             </div>
-
-            {/* Profile Avatar */}
             <div className="flex items-center gap-3 border-l border-slate-800 pl-4">
               <div className="text-right hidden md:block">
                 <p className="text-xs font-semibold text-slate-200">Andrew K.</p>
@@ -179,18 +147,13 @@ function DashboardLayout({ logo = "N7", children }) {
                 className="w-10 h-10 rounded-full border border-slate-700 bg-slate-800"
               />
             </div>
-
           </div>
         </header>
-
-        {/* Scrollable Page Body */}
         <main className="flex-1 overflow-y-auto p-8 bg-[#0b0f19]">
           {children}
         </main>
       </div>
-
     </div>
   );
 }
-
 export default DashboardLayout;

@@ -13,26 +13,19 @@ import {
   FaHeart
 } from 'react-icons/fa';
 import { websiteData, mobileData } from '../data/mockData';
-
 function LandingPage() {
   const navigate = useNavigate();
   const { solutions, brands, insights, caseStudies } = websiteData;
   const [activeCaseStudyIdx, setActiveCaseStudyIdx] = useState(0);
-
   const currentCaseStudy = caseStudies[activeCaseStudyIdx];
-
   const handleNextCaseStudy = () => {
     setActiveCaseStudyIdx((prev) => (prev + 1) % caseStudies.length);
   };
-
   const handlePrevCaseStudy = () => {
     setActiveCaseStudyIdx((prev) => (prev - 1 + caseStudies.length) % caseStudies.length);
   };
-
   return (
     <div className="min-h-screen bg-[#070b13] text-slate-100 font-sans selection:bg-blue-600 selection:text-white">
-      
-      {/* 1. Navbar */}
       <nav className="sticky top-0 z-50 glass-panel border-x-0 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
           <div className="flex items-center gap-12">
@@ -53,7 +46,6 @@ function LandingPage() {
               <a href="#about" className="hover:text-white transition-colors">About Us</a>
             </div>
           </div>
-
           <div className="flex items-center gap-4">
             <button className="text-xs px-5 py-2.5 rounded-full border border-slate-700 font-bold hover:bg-slate-800 transition-colors">
               Request Demo
@@ -61,15 +53,10 @@ function LandingPage() {
           </div>
         </div>
       </nav>
-
-      {/* 2. Hero Section */}
       <header className="relative pt-12 pb-24 overflow-hidden">
-        {/* Background gradient lights */}
         <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-blue-600/10 blur-[120px] pointer-events-none"></div>
         <div className="absolute top-1/3 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] rounded-full bg-purple-600/10 blur-[100px] pointer-events-none"></div>
-
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Text */}
           <div className="space-y-8 text-left">
             <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] font-display text-white">
               The new foundation <br />
@@ -89,10 +76,7 @@ function LandingPage() {
               </button>
             </div>
           </div>
-
-          {/* Right Floating Mockups Graphic */}
           <div className="relative flex justify-center items-center">
-            {/* Main Rounded Image */}
             <div className="relative w-[340px] md:w-[420px] h-[280px] md:h-[350px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl z-10 animate-float bg-slate-850">
               <img 
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=450" 
@@ -101,9 +85,6 @@ function LandingPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
             </div>
-
-            {/* Overlapping Glassmorphism Floating Cards */}
-            {/* Card 1: Balance (Upper Right overlay) */}
             <div className="absolute top-[-20px] right-[-10px] md:right-[20px] glass-panel rounded-2xl p-4 shadow-xl z-20 w-[200px] select-none hover:scale-105 transition-transform text-left">
               <div className="flex items-center gap-2">
                 <img 
@@ -126,8 +107,6 @@ function LandingPage() {
                 <div className="bg-slate-800/80 border border-slate-700 rounded py-1">More</div>
               </div>
             </div>
-
-            {/* Card 2: Transactions (Lower Left overlay) */}
             <div className="absolute bottom-[-30px] left-[-10px] md:left-[20px] glass-panel rounded-2xl p-4 shadow-xl z-25 w-[210px] select-none hover:scale-105 transition-transform text-left">
               <p className="text-[10px] font-extrabold text-slate-350 border-b border-slate-800 pb-1.5 mb-2">Recent activity</p>
               <div className="space-y-2">
@@ -141,7 +120,6 @@ function LandingPage() {
                   </div>
                   <span className="font-bold text-slate-300">-$59.00</span>
                 </div>
-                
                 <div className="flex justify-between items-center text-[9px] bg-slate-850/50 p-1.5 rounded-lg border border-slate-800/40">
                   <div className="flex items-center gap-1.5">
                     <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[8px] uppercase">G</div>
@@ -157,8 +135,6 @@ function LandingPage() {
           </div>
         </div>
       </header>
-
-      {/* 3. Trusted Brands Section */}
       <section className="border-y border-slate-900 bg-[#06080e]/60 py-10 select-none">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
@@ -173,8 +149,6 @@ function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 4. Solutions Section */}
       <section id="solutions" className="py-24 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-16">
           <div className="lg:col-span-1 text-left space-y-6">
@@ -188,7 +162,6 @@ function LandingPage() {
               Request Demo
             </button>
           </div>
-
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             {solutions.map((sol) => (
               <div 
@@ -211,15 +184,11 @@ function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 5. Cloud Banking Section */}
       <section className="py-24 bg-[#05080f]/80 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[14rem] font-black text-slate-900/10 tracking-widest font-display select-none pointer-events-none">
           N7 SYSTEM
         </div>
-
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Text */}
           <div className="space-y-8 text-left z-10">
             <h2 className="text-4xl font-extrabold tracking-tight text-white font-display">
               A complete cloud-based <br />
@@ -237,8 +206,6 @@ function LandingPage() {
                 <FaArrowRight size={10} />
               </button>
             </div>
-            
-            {/* Checklist items */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 border-t border-slate-900">
               {[
                 "Customer-On Boarding",
@@ -257,14 +224,9 @@ function LandingPage() {
               ))}
             </div>
           </div>
-
-          {/* Right Mockup Laptop */}
           <div className="relative flex justify-center z-10 select-none">
-            {/* Stylized Laptop Shell */}
             <div className="relative w-full max-w-[500px] border border-slate-800 rounded-xl overflow-hidden shadow-2xl bg-slate-950 p-2">
               <div className="w-full bg-slate-900 rounded-lg aspect-[16/10] overflow-hidden border border-slate-800 p-1 flex flex-col justify-between">
-                
-                {/* Simulated AML Mini Dashboard header */}
                 <div className="h-5 px-3 bg-slate-950 rounded flex justify-between items-center text-[8px] text-slate-400">
                   <span>AML Dashboard</span>
                   <div className="flex gap-1.5 items-center">
@@ -272,8 +234,6 @@ function LandingPage() {
                     <span className="font-mono">ID: 003</span>
                   </div>
                 </div>
-
-                {/* Simulated content bars */}
                 <div className="flex-1 grid grid-cols-3 gap-2 mt-2 p-1">
                   <div className="col-span-2 bg-slate-950 rounded p-2 flex flex-col justify-between">
                     <div className="space-y-1">
@@ -293,23 +253,16 @@ function LandingPage() {
                     <div className="h-2 w-3/4 bg-slate-800 rounded mt-2"></div>
                   </div>
                 </div>
-
-                {/* Simulated reports rows */}
                 <div className="h-10 mt-2 space-y-1.5 bg-slate-950 rounded p-1.5">
                   <div className="h-1.5 bg-slate-800 rounded w-full"></div>
                   <div className="h-1.5 bg-slate-850 rounded w-5/6"></div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* 6. Mobile Banking Showcase (with ticker) */}
       <section className="py-24 bg-[#060910] overflow-hidden select-none">
-        
-        {/* Ticker banner */}
         <div className="w-full bg-[#0a0f1d] border-y border-slate-900 py-3 mb-16 overflow-hidden flex whitespace-nowrap">
           <div className="animate-[scroll_20s_linear_infinite] flex gap-12 text-sm font-semibold text-slate-500 uppercase tracking-widest">
             {Array(5).fill(0).map((_, idx) => (
@@ -319,23 +272,14 @@ function LandingPage() {
             ))}
           </div>
         </div>
-
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Left Mockup Phone */}
           <div className="flex justify-center items-center order-last lg:order-first">
-            {/* iPhone Shell Wrapper for Profile */}
             <div className="w-[280px] h-[550px] bg-[#0c1222] border-4 border-slate-800 rounded-[40px] shadow-2xl p-2 relative flex flex-col justify-between overflow-hidden">
-              {/* Notch */}
               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-4 bg-black rounded-full z-30"></div>
-              
-              {/* Status bar */}
               <div className="h-6 flex justify-between items-center px-4 text-[9px] text-slate-400 mt-1">
                 <span>9:41</span>
                 <span>••• LTE</span>
               </div>
-
-              {/* Screen page */}
               <div className="flex-1 bg-white rounded-[32px] overflow-hidden flex flex-col justify-between p-4 text-slate-900 text-left mt-2">
                 <div className="flex flex-col items-center mt-6">
                   <img 
@@ -346,7 +290,6 @@ function LandingPage() {
                   <p className="text-sm font-bold text-slate-800 font-display mt-2">Toni Kross</p>
                   <p className="text-[9px] text-slate-400">tonikross@gmail.com</p>
                 </div>
-                
                 <div className="space-y-2 mt-4">
                   {["Profile setting", "Setting", "Support", "Sign out"].map((label, lIdx) => (
                     <div key={lIdx} className="bg-slate-50 border border-slate-100 rounded-xl p-3 flex justify-between items-center text-[10px] font-bold text-slate-700">
@@ -355,7 +298,6 @@ function LandingPage() {
                     </div>
                   ))}
                 </div>
-
                 <div className="h-8 border-t border-slate-100 mt-4 flex justify-around items-center text-slate-350 text-[10px]">
                   <span>Home</span>
                   <span>Stats</span>
@@ -365,8 +307,6 @@ function LandingPage() {
               </div>
             </div>
           </div>
-
-          {/* Right Text */}
           <div className="space-y-8 text-left">
             <h2 className="text-4xl font-extrabold tracking-tight text-white font-display">
               Digital banking <br />
@@ -384,8 +324,6 @@ function LandingPage() {
                 <FaArrowRight size={10} />
               </button>
             </div>
-
-            {/* Showcase Checklist */}
             <div className="space-y-3.5 pt-6 border-t border-slate-900">
               {[
                 "Branchless & Paperless Banking",
@@ -399,11 +337,8 @@ function LandingPage() {
               ))}
             </div>
           </div>
-
         </div>
       </section>
-
-      {/* 7. Paperless CTA Section */}
       <section className="py-20 bg-gradient-to-tr from-slate-950 via-slate-900 to-[#0c1221] border-y border-slate-900 select-none">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-left">
           <div className="space-y-4 max-w-xl">
@@ -425,11 +360,8 @@ function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 8. Insights/Blog Section */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-          {/* Left Column intro */}
           <div className="lg:col-span-2 text-left space-y-6">
             <h2 className="text-4xl font-extrabold tracking-tight text-white font-display">
               Get yourself up-to-speed on all the things happening in fintech
@@ -441,13 +373,9 @@ function LandingPage() {
               Insights Hub
             </button>
           </div>
-
-          {/* Right Column grid */}
           <div className="lg:col-span-3 space-y-6">
-            {/* Top Large Card */}
             <div className="glass-panel rounded-2xl p-6 flex flex-col md:flex-row gap-6 hover:bg-slate-800/15 transition-all text-left group">
               <div className="w-full md:w-44 h-32 rounded-xl bg-gradient-to-tr from-cyan-600 to-indigo-800 shrink-0 relative overflow-hidden flex items-center justify-center text-white">
-                {/* Geometric icon mock */}
                 <div className="grid grid-cols-2 gap-2 opacity-40">
                   <div className="w-6 h-6 border-2 border-white rotate-45"></div>
                   <div className="w-6 h-6 border-2 border-white rotate-45"></div>
@@ -471,8 +399,6 @@ function LandingPage() {
                 </div>
               </div>
             </div>
-
-            {/* Bottom Two Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {insights.slice(1).map((item) => (
                 <div 
@@ -497,20 +423,15 @@ function LandingPage() {
                 </div>
               ))}
             </div>
-
-            {/* Link link */}
             <div className="text-right select-none">
               <button className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 ml-auto">
                 <span>Read all insights</span>
                 <FaAngleRight />
               </button>
             </div>
-
           </div>
         </div>
       </section>
-
-      {/* 9. Case Studies Section */}
       <section className="py-24 bg-[#05080e]/70 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-12">
           <div>
@@ -521,18 +442,13 @@ function LandingPage() {
               Read how leading finance and banking entities integrate CB7 and N7 modules for growth.
             </p>
           </div>
-
-          {/* Interactive Carousel */}
           <div className="max-w-3xl mx-auto glass-panel rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center text-left relative overflow-hidden group">
-            {/* Image Placeholder panel */}
             <div className="w-full md:w-52 h-44 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-800 to-cyan-600 shrink-0 relative overflow-hidden flex items-center justify-center text-white">
               <div className="grid grid-cols-2 gap-3 opacity-30 select-none">
                 <div className="w-8 h-8 rounded border-2 border-white"></div>
                 <div className="w-8 h-8 rounded border-2 border-white"></div>
               </div>
             </div>
-            
-            {/* Case Study Details */}
             <div className="flex flex-col justify-between flex-1 h-full space-y-4">
               <div className="space-y-3">
                 <span className="text-[9px] font-bold text-blue-400 uppercase tracking-widest">
@@ -545,15 +461,12 @@ function LandingPage() {
                   {currentCaseStudy.description}
                 </p>
               </div>
-              
               <div className="flex justify-between items-center text-[10px] text-slate-500 border-t border-slate-800/80 pt-4">
                 <span className="font-bold text-slate-350">Client: {currentCaseStudy.client}</span>
                 <button className="text-cyan-400 font-bold hover:underline">Read full story</button>
               </div>
             </div>
           </div>
-
-          {/* Slider controls */}
           <div className="flex items-center justify-center gap-6 select-none">
             <button 
               onClick={handlePrevCaseStudy}
@@ -561,8 +474,6 @@ function LandingPage() {
             >
               <FaChevronLeft size={12} />
             </button>
-            
-            {/* Dots */}
             <div className="flex gap-2">
               {caseStudies.map((_, idx) => (
                 <div 
@@ -573,7 +484,6 @@ function LandingPage() {
                 />
               ))}
             </div>
-
             <button 
               onClick={handleNextCaseStudy}
               className="w-10 h-10 rounded-full border border-slate-700 hover:border-slate-500 hover:text-white flex items-center justify-center transition-colors text-slate-400"
@@ -583,12 +493,8 @@ function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 10. Footer */}
       <footer className="border-t border-slate-900 bg-[#04060b] pt-20 pb-12 text-slate-400">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-left mb-16">
-          
-          {/* Logo & Company details */}
           <div className="space-y-6">
             <div className="h-14 flex items-center">
               <span className="text-4xl font-black font-display text-blue-500 tracking-wider">
@@ -599,8 +505,6 @@ function LandingPage() {
               Copyright © 2022 by Linktia Infosystems Limited - [CB7 and N7 as Commercial Brand] - [Registered under the Companies Act 2006 in England and Wales | Number of Incorporation 13100992]
             </p>
           </div>
-
-          {/* London Column */}
           <div className="space-y-4 text-xs font-medium">
             <h5 className="text-white font-bold uppercase tracking-wider font-display">London Office</h5>
             <p className="leading-relaxed">
@@ -609,8 +513,6 @@ function LandingPage() {
               England, United Kingdom.
             </p>
           </div>
-
-          {/* Dubai Column */}
           <div className="space-y-4 text-xs font-medium">
             <h5 className="text-white font-bold uppercase tracking-wider font-display">Dubai Office</h5>
             <p className="leading-relaxed">
@@ -619,8 +521,6 @@ function LandingPage() {
               Jumeirah Lakes Towers, Dubai, UAE.
             </p>
           </div>
-
-          {/* India (Pune) Column */}
           <div className="space-y-4 text-xs font-medium">
             <h5 className="text-white font-bold uppercase tracking-wider font-display">Pune Office</h5>
             <p className="leading-relaxed">
@@ -629,12 +529,8 @@ function LandingPage() {
               Pune, Maharashtra, 411041, India.
             </p>
           </div>
-
         </div>
-
-        {/* Footer directories links */}
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-3 gap-8 text-left border-t border-slate-900/60 pt-10 text-xs font-semibold select-none">
-          {/* Solutions Directory */}
           <div className="space-y-3">
             <h6 className="text-white font-bold uppercase tracking-wider text-[10px]">Solutions</h6>
             <ul className="space-y-2">
@@ -648,8 +544,6 @@ function LandingPage() {
               ))}
             </ul>
           </div>
-
-          {/* Company Directory */}
           <div className="space-y-3">
             <h6 className="text-white font-bold uppercase tracking-wider text-[10px]">N7 Banking</h6>
             <ul className="space-y-2">
@@ -662,8 +556,6 @@ function LandingPage() {
               ))}
             </ul>
           </div>
-
-          {/* Socials directory */}
           <div className="space-y-3">
             <h6 className="text-white font-bold uppercase tracking-wider text-[10px]">Our Socials</h6>
             <ul className="space-y-2">
@@ -677,8 +569,6 @@ function LandingPage() {
             </ul>
           </div>
         </div>
-
-        {/* Heart line footer */}
         <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-950 flex justify-between items-center text-[10px] text-slate-650">
           <span>Registered under Co. Act England & Wales.</span>
           <span className="flex items-center gap-1 font-semibold">
@@ -686,9 +576,7 @@ function LandingPage() {
           </span>
         </div>
       </footer>
-
     </div>
   );
 }
-
 export default LandingPage;

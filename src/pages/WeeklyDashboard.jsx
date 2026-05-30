@@ -14,11 +14,9 @@ import {
   FaExchangeAlt,
   FaCheck
 } from 'react-icons/fa';
-
 function WeeklyDashboard() {
   const { account, goals, outcomeStats, history, quickContacts } = weeklyData;
   const [cardActive, setCardActive] = useState(true);
-
   const getGoalIcon = (icon) => {
     switch (icon) {
       case 'mountain': return <FaMountain className="text-blue-500 text-base" />;
@@ -26,26 +24,17 @@ function WeeklyDashboard() {
       default: return <FaGamepad className="text-emerald-500 text-base" />;
     }
   };
-
   return (
     <DashboardLayout logo="CB7">
       <div className="space-y-6">
-        
-        {/* Header Title */}
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-white font-display">Weekly sumup</h1>
             <p className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-semibold">Get summary of your weekly online transactions here</p>
           </div>
         </div>
-
-        {/* Layout Grid: Left column (Cards & History), Right column (Goals, Stats, Quick Pay) */}
         <div className="grid grid-cols-1 xl:grid-cols-5 gap-6">
-          
-          {/* Left Column (3/5 width) */}
           <div className="xl:col-span-3 space-y-6">
-            
-            {/* Cards and Balance Panel */}
             <div className="glass-panel rounded-2xl p-6 shadow-md">
               <div className="flex justify-between items-center pb-3 border-b border-slate-800 mb-6">
                 <h3 className="text-sm font-bold text-slate-200">Cards</h3>
@@ -53,12 +42,9 @@ function WeeklyDashboard() {
                   <FaEllipsisV />
                 </button>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                {/* Credit Card Graphic */}
                 <div className="relative w-full h-[180px] bg-gradient-to-br from-blue-600 via-sky-600 to-indigo-800 rounded-2xl p-6 text-white flex flex-col justify-between shadow-lg overflow-hidden border border-sky-400/20">
                   <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-yellow-300 via-red-200 to-indigo-900 pointer-events-none"></div>
-                  
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-[10px] text-sky-200 tracking-widest font-mono">PLATINUM ACCOUNT</p>
@@ -66,11 +52,9 @@ function WeeklyDashboard() {
                     </div>
                     <span className="text-sm font-bold tracking-widest font-display italic text-slate-100">CB7</span>
                   </div>
-                  
                   <div className="text-lg font-bold font-mono tracking-widest my-2 text-center">
                     {account.cardNumber}
                   </div>
-                  
                   <div className="flex justify-between items-end">
                     <div>
                       <p className="text-[8px] text-sky-200/60 uppercase">CARD HOLDER</p>
@@ -82,8 +66,6 @@ function WeeklyDashboard() {
                     </div>
                   </div>
                 </div>
-
-                {/* Financial Summary */}
                 <div className="space-y-4">
                   <div>
                     <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Current Balance</p>
@@ -91,7 +73,6 @@ function WeeklyDashboard() {
                       ${account.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </p>
                   </div>
-                  
                   <div className="grid grid-cols-2 gap-4 pt-2">
                     <div>
                       <p className="text-[10px] text-slate-400 font-semibold uppercase">Income</p>
@@ -102,8 +83,6 @@ function WeeklyDashboard() {
                       <p className="text-sm font-bold text-rose-400 font-display">-${account.outcome.toFixed(2)}</p>
                     </div>
                   </div>
-
-                  {/* Limit Progress Bar */}
                   <div className="pt-2">
                     <div className="flex justify-between text-[10px] text-slate-400 font-semibold mb-1">
                       <span>Weekly payment limit</span>
@@ -116,8 +95,6 @@ function WeeklyDashboard() {
                       ></div>
                     </div>
                   </div>
-
-                  {/* Card Deactivate Toggle */}
                   <div className="flex justify-between items-center pt-2 select-none">
                     <span className="text-xs font-semibold text-slate-400">Deactivate card</span>
                     <button 
@@ -134,8 +111,6 @@ function WeeklyDashboard() {
                 </div>
               </div>
             </div>
-
-            {/* Transaction History Table */}
             <div className="glass-panel rounded-2xl p-6 shadow-md">
               <div className="flex justify-between items-center pb-3 border-b border-slate-800 mb-4">
                 <h3 className="text-sm font-bold text-slate-200">Transaction history</h3>
@@ -143,7 +118,6 @@ function WeeklyDashboard() {
                   <FaEllipsisV />
                 </button>
               </div>
-
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
@@ -169,13 +143,8 @@ function WeeklyDashboard() {
                 </table>
               </div>
             </div>
-
           </div>
-
-          {/* Right Column (2/5 width) */}
           <div className="xl:col-span-2 space-y-6">
-            
-            {/* Goals Widget */}
             <div className="glass-panel rounded-2xl p-6 shadow-md">
               <div className="flex justify-between items-center pb-3 border-b border-slate-800 mb-4">
                 <h3 className="text-sm font-bold text-slate-200">Goals</h3>
@@ -183,8 +152,6 @@ function WeeklyDashboard() {
                   <FaPlus size={10} />
                 </button>
               </div>
-
-              {/* Goals Cards Horizontal Slider */}
               <div className="grid grid-cols-3 gap-3">
                 {goals.map((goal) => (
                   <div 
@@ -201,12 +168,8 @@ function WeeklyDashboard() {
                 ))}
               </div>
             </div>
-
-            {/* Outcome Statistics progress bars */}
             <div className="glass-panel rounded-2xl p-6 shadow-md space-y-4">
               <h3 className="text-sm font-bold text-slate-200 border-b border-slate-800 pb-3 mb-2">Outcome Statistics</h3>
-              
-              {/* Shopping Bar */}
               <div className="space-y-1.5 select-none">
                 <div className="flex justify-between items-center text-xs">
                   <div className="flex items-center gap-2 text-slate-300 font-medium">
@@ -221,8 +184,6 @@ function WeeklyDashboard() {
                   <div className="h-full bg-orange-500 rounded-full" style={{ width: `${outcomeStats.shopping}%` }}></div>
                 </div>
               </div>
-
-              {/* Electronics Bar */}
               <div className="space-y-1.5 select-none">
                 <div className="flex justify-between items-center text-xs">
                   <div className="flex items-center gap-2 text-slate-300 font-medium">
@@ -237,8 +198,6 @@ function WeeklyDashboard() {
                   <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${outcomeStats.electronics}%` }}></div>
                 </div>
               </div>
-
-              {/* Travels Bar */}
               <div className="space-y-1.5 select-none">
                 <div className="flex justify-between items-center text-xs">
                   <div className="flex items-center gap-2 text-slate-300 font-medium">
@@ -254,13 +213,9 @@ function WeeklyDashboard() {
                 </div>
               </div>
             </div>
-
-            {/* New Transaction / Quick Send Widget */}
             <div className="glass-panel rounded-2xl p-6 shadow-md">
               <h3 className="text-sm font-bold text-slate-200 border-b border-slate-800 pb-3 mb-4">New transaction</h3>
-              
               <div className="flex items-center gap-4">
-                {/* Contacts grid list */}
                 <div className="flex-1 flex gap-3 overflow-x-auto py-1 no-scrollbar select-none">
                   {quickContacts.map((contact, idx) => (
                     <div key={idx} className="flex flex-col items-center shrink-0">
@@ -271,21 +226,15 @@ function WeeklyDashboard() {
                     </div>
                   ))}
                 </div>
-
-                {/* Send action arrow */}
                 <button className="w-10 h-10 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shrink-0 hover:scale-[1.05] hover:shadow-lg hover:shadow-blue-500/15 active:scale-[0.97] transition-all">
                   <FaArrowRight />
                 </button>
               </div>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </DashboardLayout>
   );
 }
-
 export default WeeklyDashboard;

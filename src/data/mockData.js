@@ -1,5 +1,3 @@
-// Static Mock Data for all Landing website, Dashboards, and Mobile pages
-
 export const websiteData = {
   solutions: [
     {
@@ -83,12 +81,11 @@ export const websiteData = {
     }
   ]
 };
-
 export const mobileData = {
   user: {
     name: "Toni Kross",
     email: "tonikross@gmail.com",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100", // placeholder avatar of someone smiling
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100", 
     balance: 42295.00,
     statsBalance: 8295.00,
     cards: [
@@ -175,13 +172,12 @@ export const mobileData = {
   statsChart: [
     { name: "Jan", Spend: 210, Income: 350 },
     { name: "Feb", Spend: 340, Income: 400 },
-    { name: "Mar", Spend: 453, Income: 453 }, // Highlighted in design
+    { name: "Mar", Spend: 453, Income: 453 }, 
     { name: "Apr", Spend: 180, Income: 380 },
     { name: "May", Spend: 290, Income: 410 },
     { name: "Jun", Spend: 230, Income: 500 }
   ]
 };
-
 export const amlData = {
   summary: {
     strCount: 450,
@@ -209,7 +205,6 @@ export const amlData = {
     { id: "145", branch: "Branch 7", identifiedDate: "02-01-2022", transactionDate: "29-12-2021", mode: "152", amount: "65", type: "160", account: "65", customer: "65" }
   ]
 };
-
 export const ckycData = {
   summary: {
     totalCustomer: 2115,
@@ -277,7 +272,6 @@ export const ckycData = {
     }
   ]
 };
-
 export const weeklyData = {
   account: {
     cardHolder: "Mike Smith",

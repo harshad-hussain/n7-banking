@@ -3,23 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { FaHome, FaExchangeAlt, FaCreditCard, FaUser, FaChevronRight, FaCog, FaHeadphones, FaSignOutAlt } from 'react-icons/fa';
 import MobileShell from '../components/mobile/MobileShell';
 import { mobileData } from '../data/mockData';
-
 function MobileProfile() {
   const navigate = useNavigate();
   const { user } = mobileData;
-
   const menuItems = [
     { label: "Profile setting", icon: FaUser, color: "text-slate-600 bg-slate-100" },
     { label: "Setting", icon: FaCog, color: "text-slate-600 bg-slate-100" },
     { label: "Support", icon: FaHeadphones, color: "text-slate-600 bg-slate-100" },
     { label: "Sign out", icon: FaSignOutAlt, color: "text-rose-500 bg-rose-50" }
   ];
-
   return (
     <MobileShell>
       <div className="flex-1 flex flex-col h-full bg-slate-50 text-slate-900 pb-20 overflow-y-auto no-scrollbar">
-        
-        {/* Profile Card Info */}
         <div className="bg-white px-6 pt-10 pb-8 flex flex-col items-center border-b border-slate-100 text-center select-none">
           <div className="relative">
             <img 
@@ -29,12 +24,9 @@ function MobileProfile() {
             />
             <div className="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white"></div>
           </div>
-          
           <h2 className="text-lg font-bold text-slate-800 tracking-tight mt-4 font-display">{user.name}</h2>
           <p className="text-xs text-slate-400 font-medium">{user.email}</p>
         </div>
-
-        {/* Profile Submenus */}
         <div className="px-6 mt-6 space-y-3 flex-1 select-none">
           {menuItems.map((item, idx) => {
             const Icon = item.icon;
@@ -54,8 +46,6 @@ function MobileProfile() {
             );
           })}
         </div>
-
-        {/* Bottom Nav Bar (Absolute positioned in Shell) */}
         <div className="absolute bottom-0 w-full h-[64px] bg-white border-t border-slate-100 flex justify-around items-center px-4">
           <button 
             onClick={() => navigate('/mobile')}
@@ -64,7 +54,6 @@ function MobileProfile() {
             <FaHome size={16} />
             <span className="text-[9px] mt-0.5">Home</span>
           </button>
-          
           <button 
             onClick={() => navigate('/mobile/transaction')}
             className="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600"
@@ -72,21 +61,17 @@ function MobileProfile() {
             <FaExchangeAlt size={16} />
             <span className="text-[9px] mt-0.5">Stats</span>
           </button>
-
           <button className="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600">
             <FaCreditCard size={16} />
             <span className="text-[9px] mt-0.5">Card</span>
           </button>
-
           <button className="flex flex-col items-center justify-center text-blue-600">
             <FaUser size={18} />
             <span className="text-[9px] font-semibold mt-0.5">Profile</span>
           </button>
         </div>
-
       </div>
     </MobileShell>
   );
 }
-
 export default MobileProfile;

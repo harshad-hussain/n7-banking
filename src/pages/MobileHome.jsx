@@ -3,11 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { FaBell, FaHome, FaExchangeAlt, FaCreditCard, FaUser, FaDropbox, FaSpotify, FaYoutube, FaBriefcase, FaEllipsisH } from 'react-icons/fa';
 import MobileShell from '../components/mobile/MobileShell';
 import { mobileData } from '../data/mockData';
-
 function MobileHome() {
   const navigate = useNavigate();
   const { user, transactions } = mobileData;
-
   const getTxIcon = (type) => {
     switch (type) {
       case 'dropbox': return <FaDropbox className="text-blue-500 text-lg" />;
@@ -16,12 +14,9 @@ function MobileHome() {
       default: return <FaBriefcase className="text-violet-500 text-lg" />;
     }
   };
-
   return (
     <MobileShell>
       <div className="flex-1 flex flex-col h-full bg-slate-50 text-slate-900 pb-20 overflow-y-auto no-scrollbar">
-        
-        {/* Header */}
         <div className="px-6 pt-6 pb-4 flex justify-between items-center bg-white border-b border-slate-100">
           <div>
             <p className="text-xs text-slate-400 font-medium">Welcome Back,</p>
@@ -39,8 +34,6 @@ function MobileHome() {
             />
           </div>
         </div>
-
-        {/* Card Slider */}
         <div className="px-6 mt-6 select-none">
           <div className="flex overflow-x-auto gap-4 py-2 no-scrollbar snap-x snap-mandatory">
             {user.cards.map((card, idx) => (
@@ -48,9 +41,7 @@ function MobileHome() {
                 key={idx}
                 className={`snap-center shrink-0 w-[290px] h-[175px] bg-gradient-to-tr ${card.gradient} rounded-[24px] p-6 text-white flex flex-col justify-between shadow-lg relative overflow-hidden`}
               >
-                {/* Wave highlights inside credit card */}
                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-300 via-indigo-200 to-indigo-900 pointer-events-none"></div>
-                
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-[10px] text-sky-200/80 font-medium tracking-wider">BALANCE</p>
@@ -58,7 +49,6 @@ function MobileHome() {
                   </div>
                   <FaEllipsisH className="text-sky-200/70" />
                 </div>
-                
                 <div className="flex justify-between items-end mt-4">
                   <div>
                     <p className="text-[9px] text-sky-200/60 uppercase">CARD HOLDER</p>
@@ -70,8 +60,6 @@ function MobileHome() {
             ))}
           </div>
         </div>
-
-        {/* Recent Transactions Header */}
         <div className="px-6 mt-6 flex justify-between items-center">
           <h3 className="text-sm font-bold text-slate-800">Recent Transactions</h3>
           <button 
@@ -81,8 +69,6 @@ function MobileHome() {
             See all
           </button>
         </div>
-
-        {/* Transactions List */}
         <div className="px-6 mt-3 space-y-3 flex-1">
           {transactions.map((tx) => (
             <div key={tx.id} className="bg-white rounded-2xl p-4 flex items-center justify-between border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
@@ -103,14 +89,11 @@ function MobileHome() {
             </div>
           ))}
         </div>
-
-        {/* Bottom Nav Bar (Absolute positioned in Shell) */}
         <div className="absolute bottom-0 w-full h-[64px] bg-white border-t border-slate-100 flex justify-around items-center px-4">
           <button className="flex flex-col items-center justify-center text-blue-600">
             <FaHome size={18} />
             <span className="text-[9px] font-semibold mt-0.5">Home</span>
           </button>
-          
           <button 
             onClick={() => navigate('/mobile/transaction')}
             className="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600"
@@ -118,12 +101,10 @@ function MobileHome() {
             <FaExchangeAlt size={16} />
             <span className="text-[9px] mt-0.5">Stats</span>
           </button>
-
           <button className="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600">
             <FaCreditCard size={16} />
             <span className="text-[9px] mt-0.5">Card</span>
           </button>
-
           <button 
             onClick={() => navigate('/mobile/profile')}
             className="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600"
@@ -132,10 +113,8 @@ function MobileHome() {
             <span className="text-[9px] mt-0.5">Profile</span>
           </button>
         </div>
-
       </div>
     </MobileShell>
   );
 }
-
 export default MobileHome;
