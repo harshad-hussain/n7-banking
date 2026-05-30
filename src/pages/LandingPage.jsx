@@ -6,7 +6,7 @@ import {
   FaChevronLeft,
   FaCheckCircle, 
   FaLaptop, 
-  FaAngleRight, 
+  FaAngleRight,  
   FaDropbox,
   FaSpotify,
   FaArrowUp,
