@@ -73,7 +73,7 @@ function MobileTransaction() {
           </div>
         </div>
         <div className="px-6 mt-4 space-y-2 flex-1">
-          {recentActivity.map((act) => (
+          {(recentActivity[activeTab] || []).map((act) => (
             <div key={act.id} className="bg-white rounded-xl p-3.5 flex items-center justify-between border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center gap-3">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-xs ${

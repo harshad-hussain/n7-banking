@@ -12,12 +12,14 @@ import {
   FaTrophy,
   FaSearch,
   FaBell,
-  FaGlobe
+  FaGlobe,
+  FaArrowLeft
 } from 'react-icons/fa';
 function DashboardLayout({ logo = "N7", children }) {
   const location = useLocation();
   const isWeekly = location.pathname.includes('weekly');
   const links = [
+    { to: "/", label: "Back to Home", icon: FaArrowLeft },
     { to: "/dashboard/aml", label: "AML Dashboard", icon: FaChartBar },
     { to: "/dashboard/ckyc", label: "CKYC Dashboard", icon: FaFileAlt },
     { to: "/dashboard/weekly", label: "Weekly Summary", icon: FaTrophy },

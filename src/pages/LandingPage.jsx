@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { 
   FaArrowRight, 
   FaChevronRight, 
@@ -10,13 +10,23 @@ import {
   FaDropbox,
   FaSpotify,
   FaArrowUp,
-  FaHeart
+  FaHeart,
+  FaTimes,
+  FaCheck,
+  FaSpinner
 } from 'react-icons/fa';
 import { websiteData, mobileData } from '../data/mockData';
+import { motion, AnimatePresence } from 'framer-motion';
 function LandingPage() {
   const navigate = useNavigate();
   const { solutions, brands, insights, caseStudies } = websiteData;
   const [activeCaseStudyIdx, setActiveCaseStudyIdx] = useState(0);
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [formState, setFormState] = useState({ name: '', email: '', org: '', message: '' });
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
   const currentCaseStudy = caseStudies[activeCaseStudyIdx];
   const handleNextCaseStudy = () => {
     setActiveCaseStudyIdx((prev) => (prev + 1) % caseStudies.length);
@@ -24,30 +34,73 @@ function LandingPage() {
   const handlePrevCaseStudy = () => {
     setActiveCaseStudyIdx((prev) => (prev - 1 + caseStudies.length) % caseStudies.length);
   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormState(prev => ({ ...prev, [name]: value }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitting(true);
+    setTimeout(() => {
+      setFormSubmitting(false);
+      setFormSuccess(true);
+      setTimeout(() => {
+        setFormSuccess(false);
+        setDemoModalOpen(false);
+        setContactModalOpen(false);
+        setFormState({ name: '', email: '', org: '', message: '' });
+      }, 2000);
+    }, 1500);
+  };
   return (
     <div className="min-h-screen bg-[#070b13] text-slate-100 font-sans selection:bg-blue-600 selection:text-white">
       <nav className="sticky top-0 z-50 glass-panel border-x-0 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
           <div className="flex items-center gap-12">
-            <span className="text-3xl font-black font-display text-blue-500 tracking-wider">
+            <Link to="/" className="text-3xl font-black font-display text-blue-500 tracking-wider">
               N7
-            </span>
+            </Link>
             <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-350 select-none">
-              <div className="group relative py-2">
-                <button className="hover:text-white flex items-center gap-1">
+              <div 
+                className="relative py-2"
+                onMouseEnter={() => setSolutionsDropdownOpen(true)}
+                onMouseLeave={() => setSolutionsDropdownOpen(false)}
+              >
+                <button className="hover:text-white flex items-center gap-1 transition-colors">
                   Solutions <span className="text-[10px]">▼</span>
                 </button>
+                <AnimatePresence>
+                  {solutionsDropdownOpen && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute left-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-xl p-2 z-50 text-left"
+                    >
+                      <Link to="/dashboard/aml" className="block px-4 py-2 text-xs text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg transition-colors">
+                        AML Compliance Dashboard
+                      </Link>
+                      <Link to="/dashboard/ckyc" className="block px-4 py-2 text-xs text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg transition-colors">
+                        CKYC Registry Dashboard
+                      </Link>
+                      <Link to="/dashboard/weekly" className="block px-4 py-2 text-xs text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg transition-colors">
+                        Weekly Sumup Dashboard
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <div className="group relative py-2">
-                <button className="hover:text-white flex items-center gap-1">
-                  Resources <span className="text-[10px]">▼</span>
-                </button>
-              </div>
-              <a href="#about" className="hover:text-white transition-colors">About Us</a>
+              <Link to="/mobile" className="hover:text-white transition-colors">
+                Mobile Banking App
+              </Link>
+              <a href="#solutions" className="hover:text-white transition-colors">Our Modules</a>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <button className="text-xs px-5 py-2.5 rounded-full border border-slate-700 font-bold hover:bg-slate-800 transition-colors">
+            <button 
+              onClick={() => setDemoModalOpen(true)}
+              className="text-xs px-5 py-2.5 rounded-full border border-slate-700 font-bold hover:bg-slate-800 transition-colors cursor-pointer"
+            >
               Request Demo
             </button>
           </div>
@@ -68,10 +121,16 @@ function LandingPage() {
               We drive innovation and growth, provide seamless customer experience and operational excellence across cloud core module interfaces.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all select-none">
+              <button 
+                onClick={() => setDemoModalOpen(true)}
+                className="px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all cursor-pointer"
+              >
                 Request Demo
               </button>
-              <button className="px-8 py-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 font-bold text-sm transition-colors text-slate-300">
+              <button 
+                onClick={() => setContactModalOpen(true)}
+                className="px-8 py-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 font-bold text-sm transition-colors text-slate-350 cursor-pointer"
+              >
                 Contact Us
               </button>
             </div>
@@ -158,7 +217,10 @@ function LandingPage() {
             <p className="text-slate-400 text-sm leading-relaxed">
               We construct custom API-based modules and modules tailored for banking infrastructure, digital transformations, and microfinance management.
             </p>
-            <button className="text-xs px-6 py-3 rounded-xl border border-slate-700 font-bold hover:bg-slate-800 transition-colors">
+            <button 
+              onClick={() => setDemoModalOpen(true)}
+              className="text-xs px-6 py-3 rounded-xl border border-slate-700 font-bold hover:bg-slate-800 transition-colors cursor-pointer"
+            >
               Request Demo
             </button>
           </div>
@@ -175,8 +237,11 @@ function LandingPage() {
                   <h4 className="text-lg font-bold text-slate-200 font-display group-hover:text-white transition-colors">{sol.title}</h4>
                   <p className="text-xs text-slate-400 leading-relaxed font-medium">{sol.description}</p>
                 </div>
-                <button className="flex items-center gap-1.5 text-[11px] font-semibold text-cyan-400 hover:text-cyan-300 mt-6 pt-2 select-none">
-                  <span>Learn more</span>
+                <button 
+                  onClick={() => navigate('/dashboard/aml')}
+                  className="flex items-center gap-1.5 text-[11px] font-semibold text-cyan-400 hover:text-cyan-300 mt-6 pt-2 select-none cursor-pointer"
+                >
+                  <span>Go to Module</span>
                   <FaAngleRight className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -198,11 +263,17 @@ function LandingPage() {
               Faster time to market with our cloud-based core banking services designed for full automated module support, transaction controls, and analytics.
             </p>
             <div className="flex items-center gap-6 select-none">
-              <button className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors">
+              <button 
+                onClick={() => setDemoModalOpen(true)}
+                className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors cursor-pointer"
+              >
                 Request Demo
               </button>
-              <button className="flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300">
-                <span>Learn More</span>
+              <button 
+                onClick={() => navigate('/dashboard/aml')}
+                className="flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300 cursor-pointer"
+              >
+                <span>View Live Dashboard</span>
                 <FaArrowRight size={10} />
               </button>
             </div>
@@ -224,11 +295,14 @@ function LandingPage() {
               ))}
             </div>
           </div>
-          <div className="relative flex justify-center z-10 select-none">
+          <div 
+            onClick={() => navigate('/dashboard/aml')}
+            className="relative flex justify-center z-10 select-none cursor-pointer hover:scale-[1.01] transition-transform"
+          >
             <div className="relative w-full max-w-[500px] border border-slate-800 rounded-xl overflow-hidden shadow-2xl bg-slate-950 p-2">
               <div className="w-full bg-slate-900 rounded-lg aspect-[16/10] overflow-hidden border border-slate-800 p-1 flex flex-col justify-between">
                 <div className="h-5 px-3 bg-slate-950 rounded flex justify-between items-center text-[8px] text-slate-400">
-                  <span>AML Dashboard</span>
+                  <span>AML Dashboard (Preview Link)</span>
                   <div className="flex gap-1.5 items-center">
                     <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                     <span className="font-mono">ID: 003</span>
@@ -273,12 +347,15 @@ function LandingPage() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="flex justify-center items-center order-last lg:order-first">
+          <div 
+            onClick={() => navigate('/mobile')}
+            className="flex justify-center items-center order-last lg:order-first cursor-pointer hover:scale-[1.03] transition-all"
+          >
             <div className="w-[280px] h-[550px] bg-[#0c1222] border-4 border-slate-800 rounded-[40px] shadow-2xl p-2 relative flex flex-col justify-between overflow-hidden">
               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-4 bg-black rounded-full z-30"></div>
               <div className="h-6 flex justify-between items-center px-4 text-[9px] text-slate-400 mt-1">
                 <span>9:41</span>
-                <span>••• LTE</span>
+                <span>••• LTE (Preview Link)</span>
               </div>
               <div className="flex-1 bg-white rounded-[32px] overflow-hidden flex flex-col justify-between p-4 text-slate-900 text-left mt-2">
                 <div className="flex flex-col items-center mt-6">
@@ -316,11 +393,17 @@ function LandingPage() {
               N7 helps your financial institution improve the client experience, automate and optimize procedures without traditional branches.
             </p>
             <div className="flex items-center gap-6">
-              <button className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors">
+              <button 
+                onClick={() => setDemoModalOpen(true)}
+                className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors cursor-pointer"
+              >
                 Request Demo
               </button>
-              <button className="flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300">
-                <span>Learn More</span>
+              <button 
+                onClick={() => navigate('/mobile')}
+                className="flex items-center gap-1 text-xs font-semibold text-cyan-400 hover:text-cyan-300 cursor-pointer"
+              >
+                <span>Launch App Preview</span>
                 <FaArrowRight size={10} />
               </button>
             </div>
@@ -351,10 +434,16 @@ function LandingPage() {
             </p>
           </div>
           <div className="flex gap-4 shrink-0">
-            <button className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 font-bold text-xs transition-colors">
+            <button 
+              onClick={() => setContactModalOpen(true)}
+              className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-350 font-bold text-xs transition-colors cursor-pointer"
+            >
               Contact Us
             </button>
-            <button className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors shadow-lg shadow-blue-500/10">
+            <button 
+              onClick={() => setDemoModalOpen(true)}
+              className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors shadow-lg shadow-blue-500/10 cursor-pointer"
+            >
               Request Demo
             </button>
           </div>
@@ -369,7 +458,10 @@ function LandingPage() {
             <p className="text-slate-400 text-sm leading-relaxed">
               Read our latest engineering guides, strategic whitepapers, and reports outlining core banking compliance changes.
             </p>
-            <button className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 font-bold text-xs transition-colors">
+            <button 
+              onClick={() => setContactModalOpen(true)}
+              className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-350 font-bold text-xs transition-colors cursor-pointer"
+            >
               Insights Hub
             </button>
           </div>
@@ -395,7 +487,12 @@ function LandingPage() {
                 </div>
                 <div className="flex justify-between items-center text-[10px] text-slate-500 pt-2 border-t border-slate-800/60">
                   <span>By {insights[0].author} • {insights[0].date}</span>
-                  <button className="text-cyan-400 font-bold hover:underline select-none">Read more</button>
+                  <button 
+                    onClick={() => setContactModalOpen(true)}
+                    className="text-cyan-400 font-bold hover:underline select-none cursor-pointer"
+                  >
+                    Read more
+                  </button>
                 </div>
               </div>
             </div>
@@ -412,19 +509,27 @@ function LandingPage() {
                     <h4 className="text-sm font-bold text-slate-250 font-display group-hover:text-white transition-colors leading-snug">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-slate-450 leading-relaxed font-medium">
+                    <p className="text-xs text-slate-455 leading-relaxed font-medium">
                       {item.excerpt}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[9px] text-slate-500 mt-6 pt-3 border-t border-slate-800/60">
                     <span>By {item.author}</span>
-                    <button className="text-cyan-400 font-bold hover:underline select-none">Read more</button>
+                    <button 
+                      onClick={() => setContactModalOpen(true)}
+                      className="text-cyan-400 font-bold hover:underline select-none cursor-pointer"
+                    >
+                      Read more
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
             <div className="text-right select-none">
-              <button className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 ml-auto">
+              <button 
+                onClick={() => setContactModalOpen(true)}
+                className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 ml-auto cursor-pointer"
+              >
                 <span>Read all insights</span>
                 <FaAngleRight />
               </button>
@@ -463,14 +568,19 @@ function LandingPage() {
               </div>
               <div className="flex justify-between items-center text-[10px] text-slate-500 border-t border-slate-800/80 pt-4">
                 <span className="font-bold text-slate-350">Client: {currentCaseStudy.client}</span>
-                <button className="text-cyan-400 font-bold hover:underline">Read full story</button>
+                <button 
+                  onClick={() => setContactModalOpen(true)}
+                  className="text-cyan-400 font-bold hover:underline cursor-pointer"
+                >
+                  Read full story
+                </button>
               </div>
             </div>
           </div>
           <div className="flex items-center justify-center gap-6 select-none">
             <button 
               onClick={handlePrevCaseStudy}
-              className="w-10 h-10 rounded-full border border-slate-700 hover:border-slate-500 hover:text-white flex items-center justify-center transition-colors text-slate-400"
+              className="w-10 h-10 rounded-full border border-slate-700 hover:border-slate-500 hover:text-white flex items-center justify-center transition-colors text-slate-400 cursor-pointer"
             >
               <FaChevronLeft size={12} />
             </button>
@@ -486,7 +596,7 @@ function LandingPage() {
             </div>
             <button 
               onClick={handleNextCaseStudy}
-              className="w-10 h-10 rounded-full border border-slate-700 hover:border-slate-500 hover:text-white flex items-center justify-center transition-colors text-slate-400"
+              className="w-10 h-10 rounded-full border border-slate-700 hover:border-slate-500 hover:text-white flex items-center justify-center transition-colors text-slate-400 cursor-pointer"
             >
               <FaChevronRight size={12} />
             </button>
@@ -534,14 +644,26 @@ function LandingPage() {
           <div className="space-y-3">
             <h6 className="text-white font-bold uppercase tracking-wider text-[10px]">Solutions</h6>
             <ul className="space-y-2">
-              {solutions.map((item) => (
-                <li key={item.id}>
-                  <button className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1">
-                    <span>{item.title}</span>
-                    <FaAngleRight className="opacity-0 hover:opacity-100" />
-                  </button>
-                </li>
-              ))}
+              <li>
+                <Link to="/dashboard/aml" className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1">
+                  AML Compliance Board
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/ckyc" className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1">
+                  CKYC Registry Board
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/weekly" className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1">
+                  Weekly Summary Board
+                </Link>
+              </li>
+              <li>
+                <Link to="/mobile" className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1">
+                  Mobile app preview
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="space-y-3">
@@ -549,7 +671,10 @@ function LandingPage() {
             <ul className="space-y-2">
               {["About Us", "Solutions", "Contact", "Company", "Careers", "Insights", "Core Team", "Brand Center"].map((lbl, idx) => (
                 <li key={idx}>
-                  <button className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1">
+                  <button 
+                    onClick={() => setContactModalOpen(true)}
+                    className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1 text-left cursor-pointer"
+                  >
                     {lbl}
                   </button>
                 </li>
@@ -561,7 +686,10 @@ function LandingPage() {
             <ul className="space-y-2">
               {["LinkedIn", "X (formerly Twitter)"].map((lbl, idx) => (
                 <li key={idx}>
-                  <button className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1">
+                  <button 
+                    onClick={() => triggerToast("Navigating to official socials...")}
+                    className="hover:text-cyan-400 text-slate-500 transition-colors inline-flex items-center gap-1 text-left cursor-pointer"
+                  >
                     {lbl}
                   </button>
                 </li>
@@ -576,6 +704,164 @@ function LandingPage() {
           </span>
         </div>
       </footer>
+      <AnimatePresence>
+        {demoModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl text-left"
+            >
+              <button 
+                onClick={() => setDemoModalOpen(false)}
+                className="absolute top-4 right-4 p-1.5 rounded-lg bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
+              >
+                <FaTimes />
+              </button>
+              <h3 className="text-lg font-bold text-white font-display mb-2">Request Product Demo</h3>
+              <p className="text-xs text-slate-400 mb-6 font-medium">Please enter your work details and we will coordinate a custom walkthrough session of CB7 and N7 modules.</p>
+              {formSuccess ? (
+                <div className="flex flex-col items-center justify-center py-10 space-y-4 text-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                    <FaCheck size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-white">Demo request submitted!</p>
+                    <p className="text-xs text-slate-450 mt-1">Our sales engineering team will reach out shortly.</p>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 text-xs font-semibold">
+                  <div className="space-y-1">
+                    <label className="text-slate-400">Full Name</label>
+                    <input 
+                      type="text" 
+                      name="name" 
+                      required
+                      value={formState.name}
+                      onChange={handleInputChange}
+                      placeholder="Enter your name" 
+                      className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white placeholder-slate-550 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-400">Work Email</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      required
+                      value={formState.email}
+                      onChange={handleInputChange}
+                      placeholder="you@company.com" 
+                      className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white placeholder-slate-550 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-400">Organization Name</label>
+                    <input 
+                      type="text" 
+                      name="org" 
+                      required
+                      value={formState.org}
+                      onChange={handleInputChange}
+                      placeholder="e.g. Bank 2.0" 
+                      className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white placeholder-slate-550 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    disabled={formSubmitting}
+                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 text-white font-bold rounded-lg mt-6 shadow flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                  >
+                    {formSubmitting && <FaSpinner className="animate-spin" />}
+                    <span>{formSubmitting ? 'Sending Request...' : 'Submit Request'}</span>
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {contactModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl text-left"
+            >
+              <button 
+                onClick={() => setContactModalOpen(false)}
+                className="absolute top-4 right-4 p-1.5 rounded-lg bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
+              >
+                <FaTimes />
+              </button>
+              <h3 className="text-lg font-bold text-white font-display mb-2">Contact N7 Support</h3>
+              <p className="text-xs text-slate-400 mb-6 font-medium">Fill out the support request form and our specialists will contact you.</p>
+              {formSuccess ? (
+                <div className="flex flex-col items-center justify-center py-10 space-y-4 text-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                    <FaCheck size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-white">Support request submitted!</p>
+                    <p className="text-xs text-slate-450 mt-1">We've sent a confirmation ticket to your inbox.</p>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 text-xs font-semibold">
+                  <div className="space-y-1">
+                    <label className="text-slate-400">Name</label>
+                    <input 
+                      type="text" 
+                      name="name" 
+                      required
+                      value={formState.name}
+                      onChange={handleInputChange}
+                      placeholder="Your name" 
+                      className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white placeholder-slate-550 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-400">Email</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      required
+                      value={formState.email}
+                      onChange={handleInputChange}
+                      placeholder="you@company.com" 
+                      className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white placeholder-slate-550 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-400">Your Message</label>
+                    <textarea 
+                      name="message" 
+                      required
+                      rows={3}
+                      value={formState.message}
+                      onChange={handleInputChange}
+                      placeholder="How can we help you?" 
+                      className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-white placeholder-slate-550 focus:outline-none focus:border-blue-500 resize-none"
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    disabled={formSubmitting}
+                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 text-white font-bold rounded-lg mt-6 shadow flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                  >
+                    {formSubmitting && <FaSpinner className="animate-spin" />}
+                    <span>{formSubmitting ? 'Sending Request...' : 'Send Message'}</span>
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

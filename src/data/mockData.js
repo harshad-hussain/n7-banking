@@ -85,7 +85,7 @@ export const mobileData = {
   user: {
     name: "Toni Kross",
     email: "tonikross@gmail.com",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100", 
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100",
     balance: 42295.00,
     statsBalance: 8295.00,
     cards: [
@@ -139,40 +139,90 @@ export const mobileData = {
       iconType: "work"
     }
   ],
-  recentActivity: [
-    {
-      id: "ra1",
-      name: "To Jin - Work",
-      date: "12 jun 2022",
-      amount: -59.00,
-      type: "outgoing"
-    },
-    {
-      id: "ra2",
-      name: "From Google - Salary",
-      date: "10 jun 2022",
-      amount: 859.00,
-      type: "incoming"
-    },
-    {
-      id: "ra3",
-      name: "To David - Work",
-      date: "7 jun 2022",
-      amount: -479.00,
-      type: "outgoing"
-    },
-    {
-      id: "ra4",
-      name: "From Google - Bonus",
-      date: "10 jun 2022",
-      amount: 859.00,
-      type: "incoming"
-    }
-  ],
+  recentActivity: {
+    "This Day": [
+      {
+        id: "ra1",
+        name: "To Jin - Work",
+        date: "12 jun 2022",
+        amount: -59.00,
+        type: "outgoing"
+      }
+    ],
+    "This Week": [
+      {
+        id: "ra1",
+        name: "To Jin - Work",
+        date: "12 jun 2022",
+        amount: -59.00,
+        type: "outgoing"
+      },
+      {
+        id: "ra2",
+        name: "From Google - Salary",
+        date: "10 jun 2022",
+        amount: 859.00,
+        type: "incoming"
+      }
+    ],
+    "This Month": [
+      {
+        id: "ra1",
+        name: "To Jin - Work",
+        date: "12 jun 2022",
+        amount: -59.00,
+        type: "outgoing"
+      },
+      {
+        id: "ra2",
+        name: "From Google - Salary",
+        date: "10 jun 2022",
+        amount: 859.00,
+        type: "incoming"
+      },
+      {
+        id: "ra3",
+        name: "To David - Work",
+        date: "7 jun 2022",
+        amount: -479.00,
+        type: "outgoing"
+      }
+    ],
+    "6 Month": [
+      {
+        id: "ra1",
+        name: "To Jin - Work",
+        date: "12 jun 2022",
+        amount: -59.00,
+        type: "outgoing"
+      },
+      {
+        id: "ra2",
+        name: "From Google - Salary",
+        date: "10 jun 2022",
+        amount: 859.00,
+        type: "incoming"
+      },
+      {
+        id: "ra3",
+        name: "To David - Work",
+        date: "7 jun 2022",
+        amount: -479.00,
+        type: "outgoing"
+      },
+      {
+        id: "ra4",
+        name: "From Google - Bonus",
+        date: "10 jun 2022",
+        amount: 859.00,
+        type: "incoming"
+      }
+    ]
+  },
   statsChart: [
     { name: "Jan", Spend: 210, Income: 350 },
     { name: "Feb", Spend: 340, Income: 400 },
-    { name: "Mar", Spend: 453, Income: 453 }, 
+    { name: "Mar", Spend: 453, Income: 453 },
     { name: "Apr", Spend: 180, Income: 380 },
     { name: "May", Spend: 290, Income: 410 },
     { name: "Jun", Spend: 230, Income: 500 }
@@ -229,48 +279,31 @@ export const ckycData = {
     { name: "BR 5", pass: 90, failed: 10, total: 110 },
     { name: "BR 6", pass: 120, failed: 18, total: 152 }
   ],
-  failedRecords: [
-    {
-      id: "0076541",
-      name: "Ajaye Krishna",
-      branchNo: "02",
-      branchName: "Chandini Chowk",
-      reasons: [
-        "Aadhar Number not matching",
-        "PAN No. missing"
-      ]
-    },
-    {
-      id: "0098423",
-      name: "Raghu Nandan",
-      branchNo: "02",
-      branchName: "Chandini Chowk",
-      reasons: [
-        "Signature mismatch in identity scan",
-        "Utility bill proof older than 3 months"
-      ]
-    },
-    {
-      id: "0098424",
-      name: "Sanjay Singhania",
-      branchNo: "02",
-      branchName: "Chandini Chowk",
-      reasons: [
-        "Incorrect DOB compared to passport record",
-        "Missing photograph verification"
-      ]
-    },
-    {
-      id: "0098425",
-      name: "Priyanka Sharma",
-      branchNo: "02",
-      branchName: "Chandini Chowk",
-      reasons: [
-        "Permanent Address validation failed",
-        "Missing self-declaration form"
-      ]
-    }
-  ]
+  failedRecords: {
+    "Branch 1": [
+      { id: "0076541", name: "Ajaye Krishna", branchNo: "01", reasons: ["Aadhar Number not matching", "PAN No. missing"] },
+      { id: "0098421", name: "Ramesh Kumar", branchNo: "01", reasons: ["Mismatched address record", "Missing passport copy"] }
+    ],
+    "Branch 2": [
+      { id: "0098422", name: "Raghu Nandan", branchNo: "02", reasons: ["Signature mismatch in identity scan", "Utility bill proof older than 3 months"] },
+      { id: "0098423", name: "Sanjay Singhania", branchNo: "02", reasons: ["Incorrect DOB compared to passport record", "Missing photograph verification"] }
+    ],
+    "Branch 3": [
+      { id: "0098424", name: "Priyanka Sharma", branchNo: "03", reasons: ["Permanent Address validation failed", "Missing self-declaration form"] }
+    ],
+    "Branch 4": [
+      { id: "0076545", name: "John Doe", branchNo: "04", reasons: ["Identity scan blurry", "PAN card verification failure"] }
+    ],
+    "Branch 5": [
+      { id: "0076546", name: "Jane Doe", branchNo: "05", reasons: ["Expired driver's license proof", "Mismatched signature verification"] }
+    ],
+    "Branch 6": [
+      { id: "0076547", name: "Kabir Khan", branchNo: "06", reasons: ["Income tax declaration missing", "Aadhaar photo mismatch"] }
+    ],
+    "Branch 7": [
+      { id: "0076548", name: "Amit Patel", branchNo: "07", reasons: ["Phone verification failed", "No valid utility proof"] }
+    ]
+  }
 };
 export const weeklyData = {
   account: {

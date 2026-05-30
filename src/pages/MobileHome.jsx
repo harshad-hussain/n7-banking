@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaHome, FaExchangeAlt, FaCreditCard, FaUser, FaDropbox, FaSpotify, FaYoutube, FaBriefcase, FaEllipsisH } from 'react-icons/fa';
+import { FaBell, FaHome, FaExchangeAlt, FaCreditCard, FaUser, FaDropbox, FaSpotify, FaYoutube, FaBriefcase, FaEllipsisH, FaArrowLeft } from 'react-icons/fa';
 import MobileShell from '../components/mobile/MobileShell';
 import { mobileData } from '../data/mockData';
 function MobileHome() {
@@ -18,9 +18,17 @@ function MobileHome() {
     <MobileShell>
       <div className="flex-1 flex flex-col h-full bg-slate-50 text-slate-900 pb-20 overflow-y-auto no-scrollbar">
         <div className="px-6 pt-6 pb-4 flex justify-between items-center bg-white border-b border-slate-100">
-          <div>
-            <p className="text-xs text-slate-400 font-medium">Welcome Back,</p>
-            <h2 className="text-lg font-bold text-slate-800 tracking-tight">{user.name}</h2>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => navigate('/')}
+              className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-700 cursor-pointer"
+            >
+              <FaArrowLeft size={10} />
+            </button>
+            <div>
+              <p className="text-xs text-slate-400 font-medium">Welcome Back,</p>
+              <h2 className="text-sm font-bold text-slate-800 tracking-tight leading-tight">{user.name}</h2>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <button className="relative p-1 text-slate-500 hover:text-slate-700">
